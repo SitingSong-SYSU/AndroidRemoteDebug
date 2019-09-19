@@ -4,10 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,12 +22,21 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = findViewById(R.id.sample_text);
         tv.setText(stringFromJNI());
 
-        Switch btn = findViewById(R.id.btn_reload_jdwp);
-        btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        Switch swt = findViewById(R.id.btn_reload_jdwp);
+        swt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.d("test", "Java click reloadJdwp");
                 reloadJdwp(isChecked);
+            }
+        });
+
+        Button btn = findViewById(R.id.btn_test_click);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("test", "Java click testJdwp");
+                testJdwp();
             }
         });
     }
@@ -51,4 +57,6 @@ public class MainActivity extends AppCompatActivity {
     public native String stringFromJNI();
 
     public native void reloadJdwp(boolean open);
+
+    public native void testJdwp();
 }
